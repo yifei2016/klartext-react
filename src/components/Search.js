@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import App from '../App';
-import Autocomplete from 'react-autocomplete';
+import {actionSelectedWord} from '../actions/index';
+import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 class Search extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class Search extends Component {
   }
  handleChange(e){
    debugger
-   this.setState({select: e.target.value})
+   let action = actionSelectedWord(e.target.value);
+   this.props.dispatch(action)
  }
   logChange(e) {
 
@@ -29,21 +31,10 @@ class Search extends Component {
   }
   render() {
     return (
-      <Autocomplete
-        getItemValue={(item) => item.label}
-        items={[
-          { label: 'apple' },
-          { label: 'banana' },
-          { label: 'pear' }
-        ]}
-        renderItem={(item, isHighlighted) =>
-          <div style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
-            {item.label}
-          </div>
-        }
+      <Select.Async
         value={this.state.select}
-        onChange={this.handleChange}
-        onSelect={this.logChange}
+         onChange={this.handleChange}
+        loadOptions={this.logChange}
       />
     )
   }
