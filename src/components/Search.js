@@ -14,27 +14,28 @@ class Search extends Component {
      this.logChange = this.logChange.bind(this);
   }
  handleChange(e){
-   debugger
-   let action = actionSelectedWord(e.target.value);
-   this.props.dispatch(action)
+   this.setState({select: e})
+
  }
-  logChange(e) {
-
-    axios({
-      method:'get',
-      url:`http://localhost:8080/api/words/search?query=${this.state.select}`,
-      headers: {'Accept': 'application/json'}
-    })
+  logChange() {
+    debugger
+    axios.create({
+  baseURL: `http://localhost:8080/api/words/search?query=${this.state.select}`,
+  headers: {'Accept': 'application/json'}
+})
     .then(function(response) {
-
+  debugger
     })
   }
   render() {
+
     return (
-      <Select.Async
-        value={this.state.select}
-         onChange={this.handleChange}
+      <Select
+         name="form-field-name"
+        value='yifei'
+         onInputChange={this.handleChange}
         loadOptions={this.logChange}
+        placeholder='Select'
       />
     )
   }
