@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { connect } from 'react-redux';
+import Search from './components/Search.js';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      selectedWord:this.props.selectedWord
+    }
+  }
+
   render() {
     return (
-      <div className="App">
-       
-      </div>
+      <Search selectedWord={this.state.selectedWord}/>
     );
   }
 }
+function mapStateToProps(state){
 
-export default App;
+  return {
+    selectedWord: state.selectedWord
+  }
+}
+export default connect(mapStateToProps)(App);
