@@ -19,14 +19,19 @@ class Search extends Component {
       headers: {'Accept': 'application/json'}
     })
     .then(function(response) {
-      return response.data.map(x=>x.value)
+      // response.data.forEach(word => {
+      //   word.label = word.value;
+      // })
+      return {
+        options: response.data
+      }
     })
   }
   render() {
     return (
       <div>
       <Select.Async
-
+        labelKey='value'
         loadOptions={this.logChange}
       />
 
