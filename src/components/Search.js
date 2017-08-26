@@ -33,7 +33,16 @@ class Search extends Component {
       <Select.Async
         labelKey='value'
         loadOptions={this.logChange}
+        onNewOptionClick={this.selectedOption}
       />
+      <div className="card" style={{width:'50%'}}>
+
+          <div className="card-block">
+            <h4 className="card-title">Card title</h4>
+            <p className="card-text">Some quick exampleake up the bulk of the card's content.</p>
+
+          </div>
+        </div>
 
       </div>
     )
