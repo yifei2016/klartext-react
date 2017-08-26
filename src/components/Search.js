@@ -17,6 +17,7 @@ class Search extends Component {
     this.logChange = this.logChange.bind(this);
     this.selectedOption = this.selectedOption.bind(this);
   }
+
   logChange(input) {
     return axios({
       method:'get',
@@ -57,12 +58,14 @@ class Search extends Component {
       method:'get',
       url:`http://localhost:8080/api/posts/search?query=${sendValue}`,
       headers: {'Accept': 'application/json'}
+
     })
     .then(function(response) {
 
     }.bind(this))
   }
   render() {
+
     if(this.state.display === 'none'){
       debugger
       return (<Select.Async
