@@ -12,12 +12,13 @@ class Search extends Component {
       display: 'none',
       lang: '',
       flag: '',
-      klass: ''
+      klass: '',
+      inflection: '',
+      words: []
     }
     this.logChange = this.logChange.bind(this);
     this.selectedOption = this.selectedOption.bind(this);
   }
-
   logChange(input) {
     return axios({
       method:'get',
@@ -35,25 +36,27 @@ class Search extends Component {
   }
   selectedOption(selected){
     if(selected.lang === 'sv'){
+
     this.setState({
-      selected: selected,
+      selected: selected.value,
       display: 'block',
       klass: selected.klass,
-      flag: 'flag-icon flag-icon-se'
+      flag: 'flag-icon flag-icon-se',
+      inflection: selected.inflection
     })
   }else {
     this.setState({
-      selected: selected,
+      selected: selected.value,
       display: 'block',
       klass: selected.klass,
-      flag: 'flag-icon flag-icon-en'
+      flag: 'flag-icon flag-icon-gb',
+      inflection: selected.inflection
     })
   }
     var sendValue = selected.inflection || []
     if(sendValue.indexOf(selected.value === -1)){
       sendValue.unshift(selected.value)
     }
-
     return axios({
       method:'get',
       url:`http://localhost:8080/api/posts/search?query=${sendValue}`,
@@ -62,19 +65,26 @@ class Search extends Component {
     })
     .then(function(response) {
 
+      var words = response.data.map(word => {
+        return {body: word.body, interp: word.interp}
+      })
+
+      this.setState({
+        words: words
+      })
+
     }.bind(this))
   }
   render() {
-
     if(this.state.display === 'none'){
-      debugger
       return (<Select.Async
         labelKey='value'
         loadOptions={this.logChange}
         onChange={this.selectedOption}
       />)
     }else if(this.state.display === 'block'){
-      debugger
+      var word = this.state.words.map(word=><li key={word.body} className="list-group-item">
+        <span>{word.body}</span>, <span>{word.interp}</span> <span className="flag-icon flag-icon-gb"></span></li>)
       return (
         <div>
           <Select.Async
@@ -82,17 +92,22 @@ class Search extends Component {
             loadOptions={this.logChange}
             onChange={this.selectedOption}
           />
-          <div className="card">
+          <div className="card d-flex justify-content-center" id="cardPart">
             <div className="card-block">
-              <h4 className="card-title">fdf{this.state.selected}
+              <h4 className="card-title">{this.state.selected}
                 <span className={this.state.flag}></span>
-                <span>{this.state.klass}</span></h4>
-                <p className="card-text">Some quthe card's content.</p>
-              </div>
+                <span>{this.state.klass}</span>
+              </h4>
+              <p className="d-flex justify-content-between">{this.state.inflection}</p>
+              <h6 className="card-text d-flex justify-content-between">Examples</h6>
             </div>
+            <ul className="list-group list-group-flush">
+              {word}
+            </ul>
           </div>
-        )
-      }
+        </div>
+      )
+    }
     }
 }
 
