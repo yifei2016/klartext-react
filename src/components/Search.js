@@ -64,15 +64,12 @@ class Search extends Component {
 
     })
     .then(function(response) {
-
       var words = response.data.map(word => {
         return {body: word.body, interp: word.interp}
       })
-
       this.setState({
         words: words
       })
-
     }.bind(this))
   }
   render() {
