@@ -92,9 +92,9 @@ class Search extends Component {
             loadOptions={this.logChange}
             onChange={this.selectedOption}
           />
-          <div className="card d-flex justify-content-center" id="cardPart">
+          <div className="card" id='cardPart'>
             <div className="card-block">
-              <h4 className="card-title">{this.state.selected}
+              <h4 className="card-title d-flex justify-content-center">{this.state.selected}
                 <span className={this.state.flag}></span>
                 <span>{this.state.klass}</span>
               </h4>
