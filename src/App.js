@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Search from './components/Search.js';
-import Button from 'react-bootstrap/lib/Button';
-import {ButtonToolbar, Overlay, Popover} from 'react-bootstrap';
+import { Overlay, Popover} from 'react-bootstrap';
 class App extends Component {
   constructor(props,context) {
     super(props,context);
