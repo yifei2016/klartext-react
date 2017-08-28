@@ -1,23 +1,14 @@
-import { renderRoutes } from 'react-router-config'
+import React from 'react';
+import { Route, Switch } from 'react-router-dom'
+import SignIn from '../components/SignIn'
+import Search from '../components/Search'
 
-const routes = [
-  { component: Root,
-    routes: [
-      { path: '/',
-        exact: true,
-        component: Search
-      },
-      { path: '/#/signin',
-        component: SignIn
-
-      }
-    ]
-  }
-]
-
-ReactDOM.render((
-  <BrowserRouter>
-
-    {renderRoutes(routes)}
-  </BrowserRouter>
-), document.getElementById('root'))
+const Routes = () => {
+  <div>
+    <Switch>
+        <Route exact path="/" component={Search} />
+      <Route exact path="/signin" component={SignIn}/>
+    </Switch>
+  </div>
+}
+export default Routes

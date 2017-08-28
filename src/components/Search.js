@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-
 class Search extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +19,6 @@ class Search extends Component {
     this.handleCreate = this.handleCreate.bind(this);
   }
   logChange(input) {
-    
     return axios({
       method:'get',
       url:`http://localhost:8080/api/words/search?query=${input}`,
@@ -36,23 +34,24 @@ class Search extends Component {
     })
   }
   handleCreate(){
-    debugger
+ debugger
     var sessionStorageUser = sessionStorage.getItem('userName');
     var sessionStorageToken = sessionStorage.getItem('token');
     if (sessionStorageUser === null) {
-       this.props.router.push('/#/signin')
-      } else {
-        return axios({
-          method:'post',
-          url:`http://localhost:8080/api/users/1/posts`,
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8',
+
+       this.props.history.push("/signin")
+
+    } else {
+      return axios({
+        method:'post',
+        url:`http://localhost:8080/api/users/1/posts`,
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
             'X-Auth-Token': sessionStorageToken
           }
         })
         .then(function(response) {
-
           return {
 
           }
@@ -113,7 +112,7 @@ class Search extends Component {
             <textarea className="form-control select" rows="3" placeholder="Example"></textarea>
             <textarea className="form-control select" rows="3" placeholder="Interpretation"></textarea>
             <div className="d-flex justify-content-around">
-              <button  type="button" className="btn">Create post</button>
+              <button  type="button" className="btn btn-success" onClick={this.handleCreate}>Create post</button>
             </div>
           </div>
         </div>
@@ -146,7 +145,7 @@ class Search extends Component {
             <textarea className="form-control" rows="3" placeholder="Example"></textarea>
             <textarea className="form-control" rows="3" placeholder="Interpretation"></textarea>
             <div className="d-flex justify-content-around">
-              <button  type="button" className="btn" onClick={this.handleCreate}>Cdsfasdfte post</button>
+              <button  type="button" className="btn btn-success" onClick={this.handleCreate}>Create post</button>
             </div>
           </div>
         </div>

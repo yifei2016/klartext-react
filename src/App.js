@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Link } from 'react-router-dom';
+import { Overlay, Popover} from 'react-bootstrap';
 
 import Search from './components/Search.js';
-import { Overlay, Popover} from 'react-bootstrap';
+import './App.css';
+
 class App extends Component {
   constructor(props,context) {
     super(props,context);
@@ -24,7 +26,7 @@ class App extends Component {
         <nav className="navbar navbar-toggleable-lg navbar-inverse bg-inverse">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link nav-item">Home</a>
+              <Link to="/">dasdsa</Link>
             </li>
           </ul>
           <button onClick={this.componentWillReceiveProps}
