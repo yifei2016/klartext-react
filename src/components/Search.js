@@ -3,9 +3,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-
 class Search extends Component {
-
   static contextTypes = {
     router: PropTypes.object
   }//
@@ -116,6 +114,7 @@ class Search extends Component {
             loadOptions={this.logChange}
             onChange={this.selectedOption}
           />
+
           <div>
             <textarea className="form-control select" rows="3" placeholder="Example"></textarea>
             <textarea className="form-control select" rows="3" placeholder="Interpretation"></textarea>

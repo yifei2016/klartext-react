@@ -5,18 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
     <link rel="shortcut icon" href="./favicon.ico">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" ></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/2.8.0/css/flag-icon.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-    <script src="https://unpkg.com/react-router/umd/react-router.min.js"></script>
+    <!-- <script src="https://unpkg.com/react-router/umd/react-router.min.js"></script> -->
     <title>React App</title>
   </head>
   <body>
+    <nav class="navbar navbar-light bg-light justify-content-between">
+      <a class="navbar-brand">Navbar</a>
+      <button
+        class="btn btn-outline-success my-2 my-sm-0"
+        data-container="body"
+        data-html="true"
+        data-toggle="popover"
+        data-placement="bottom"
+        data-content='<div class="d-flex justify-content-between"><a href="/signin">sign in</a><a href="signup">sign up</a></div>'>
+         <i class="fa fa-lg fa-user" aria-hidden="true"></i>
+      </button>
+    </nav>
+    <div id="root" style="padding: 3em 3em 3em 3em;">
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 
-    <div id="root"></div>
+    <script>
+    $(function(){
+      // Enables popover
+      $("[data-toggle=popover]").popover();
+    });
+    </script>
   </body>
-</html>
+  </html>

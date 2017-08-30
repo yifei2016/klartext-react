@@ -23,6 +23,7 @@ class SignIn extends Component{
     })
   }
   signIn(){
+    debugger
      return axios({
       method:'put',
       url:'http://localhost:8080/api/users/auth',
@@ -46,25 +47,23 @@ class SignIn extends Component{
   render(){
     return (
       <div className="container">
-        <form>
-          <div className="form-group row">
-            <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
-            <div className="col-sm-10">
-              <input  type="email" className="form-control" id="inputEmail3" onChange={this.handleEmailInput} placeholder="Email"/>
-            </div>
+        <div className="form-group row">
+          <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
+          <div className="col-sm-10">
+            <input  type="email" className="form-control" id="inputEmail3" onChange={this.handleEmailInput} placeholder="Email"/>
           </div>
-          <div className="form-group row">
-            <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
-            <div className="col-sm-10">
-              <input  type="password" className="form-control" id="inputPassword3" onChange={this.handlePasswordInput} placeholder="Password"/>
-            </div>
+        </div>
+        <div className="form-group row">
+          <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
+          <div className="col-sm-10">
+            <input  type="password" className="form-control" id="inputPassword3" onChange={this.handlePasswordInput} placeholder="Password"/>
           </div>
-          <div className="form-group row">
-            <div className="offset-sm-2 col-sm-10">
-              <button type="submit" className="btn btn-primary" onClick={this.signIn}>Sign in</button>
-            </div>
+        </div>
+        <div className="form-group row">
+          <div className="offset-sm-2 col-sm-10">
+            <button type="submit" className="btn btn-primary" onClick={this.signIn}>Sign in</button>
           </div>
-        </form>
+        </div>
       </div>
     )
   }

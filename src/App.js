@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import { Link } from 'react-router-dom';
 import { Overlay, Popover} from 'react-bootstrap';
 import Search from './components/Search.js';
 import './App.css';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
 
 class App extends Component {
+
   constructor(props,context) {
     super(props,context);
     this.state = {  show: false };
@@ -12,6 +15,7 @@ class App extends Component {
       this.setState({ target: event.target, show: !this.state.show });
     }
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+
     //this.click = this.click.bind(this);
   }
   componentWillReceiveProps(e){
@@ -19,6 +23,7 @@ class App extends Component {
       return { target: e.target, show: !this.state.show };
     });
   }
+
   //click(){
 
     //this.context.router.history.push('/signin')
@@ -26,7 +31,7 @@ class App extends Component {
   render() {
     return (
       <div >
-        <nav className="navbar navbar-toggleable-lg navbar-inverse bg-inverse">
+        {/* <nav className="navbar navbar-toggleable-lg navbar-inverse bg-inverse">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to="/">Home</Link>
@@ -46,16 +51,16 @@ class App extends Component {
             container={this}
             containerPadding={20}
             >
-              <Popover  id="popover-contained" >
+              <Popover className='popover' id="popover-contained" >
                 <div className="d-flex justify-content-around">
-                  <button type="button" className="signin btn btn-link">Sign up</button>
-                  <button  type="button"  className="signin btn btn-link">Sign in</button>
+                  <Link className='authenticationButton' to="/signin">Sign in</Link>
+                  <Link to="/signup">Sign up</Link>
                 </div>
               </Popover>
             </Overlay>
-          </nav>
+          </nav> */}
           <Search />
-            {/* <button  onClick={this.click}>CLICK</button> */}
+          {/* <button  onClick={this.click}>CLICK</button> */}
         </div>
 
     );
