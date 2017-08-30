@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
+import React,{PropTypes,Component} from 'react';
 import axios from 'axios';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+
+
 class Search extends Component {
+
+  static contextTypes = {
+    router: PropTypes.object
+  }//
+
   constructor(props) {
     super(props);
     this.state = {
@@ -12,7 +19,8 @@ class Search extends Component {
       flag: '',
       klass: '',
       inflection: '',
-      words: []
+      words: [],
+      authenticated: false
     }
     this.logChange = this.logChange.bind(this);
     this.selectedOption = this.selectedOption.bind(this);
@@ -34,13 +42,11 @@ class Search extends Component {
     })
   }
   handleCreate(){
- debugger
     var sessionStorageUser = sessionStorage.getItem('userName');
     var sessionStorageToken = sessionStorage.getItem('token');
     if (sessionStorageUser === null) {
-
-       this.props.history.push("/signin")
-
+      //this.props.history.push('/signin');
+       this.context.router.history.push('/signin');
     } else {
       return axios({
         method:'post',
@@ -52,6 +58,7 @@ class Search extends Component {
           }
         })
         .then(function(response) {
+          debugger
           return {
 
           }
@@ -99,6 +106,7 @@ class Search extends Component {
     }.bind(this))
   }
   render() {
+
     if(this.state.display === 'none'){
       return (
         <div className="inputsArea">
@@ -153,5 +161,4 @@ class Search extends Component {
     }
     }
 }
-
 export default Search;

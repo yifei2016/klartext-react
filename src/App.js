@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Overlay, Popover} from 'react-bootstrap';
-
 import Search from './components/Search.js';
 import './App.css';
 
@@ -13,26 +12,31 @@ class App extends Component {
       this.setState({ target: event.target, show: !this.state.show });
     }
     this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+    //this.click = this.click.bind(this);
   }
   componentWillReceiveProps(e){
     this.setState(function(prevState,props){
       return { target: e.target, show: !this.state.show };
     });
-
   }
+  //click(){
+
+    //this.context.router.history.push('/signin')
+  //}//to see if we can retrive history here in container component, history can not be used in nested component, such as Search
   render() {
     return (
       <div >
         <nav className="navbar navbar-toggleable-lg navbar-inverse bg-inverse">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to="/">dasdsa</Link>
+              <Link to="/">Home</Link>
             </li>
           </ul>
-          <button onClick={this.componentWillReceiveProps}
+          <button
+            type="button"
             className="btn btn-secondary signUp navbar-toggler-right"
             data-toggle="collapse"
-            type="button"
+            onClick={this.componentWillReceiveProps}
             ><i className="fa fa-lg fa-user" aria-hidden="true"></i>
           </button>
           <Overlay
@@ -51,6 +55,7 @@ class App extends Component {
             </Overlay>
           </nav>
           <Search />
+            {/* <button  onClick={this.click}>CLICK</button> */}
         </div>
 
     );
