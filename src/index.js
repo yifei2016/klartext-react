@@ -10,7 +10,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Search from './components/Search';
-
+import Mypage from './components/Mypage';
+////if component is not in router, then can not use props.route
 
 let initialState = {
   selectedWord: 'yifei'
@@ -28,6 +29,7 @@ ReactDOM.render((
       <Route exact path="/" component={Search} />
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/signin"  component={SignIn}/>
+      <Route exact path="/mypage" component={Mypage}/>
     </div>
   </Router>), document.getElementById('root'));
 

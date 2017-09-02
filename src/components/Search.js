@@ -4,9 +4,9 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
 class Search extends Component {
-  static contextTypes = {
-    router: PropTypes.object
-  }//
+  // static contextTypes = {
+  //   router: PropTypes.object
+  // }//
 
   constructor(props) {
     super(props);
@@ -18,7 +18,9 @@ class Search extends Component {
       klass: '',
       inflection: '',
       words: [],
-      authenticated: false
+      authenticated: false,
+      exampel: '',
+      interpretation: ''
     }
     this.logChange = this.logChange.bind(this);
     this.selectedOption = this.selectedOption.bind(this);
@@ -39,12 +41,19 @@ class Search extends Component {
       }
     })
   }
+  handleExample(e){
+      this.example = e.target.value
+  }
+  handleInterpretation(e){
+     this.example = e.target.value
+  }
   handleCreate(){
+    debugger
     var sessionStorageUser = sessionStorage.getItem('userName');
     var sessionStorageToken = sessionStorage.getItem('token');
     if (sessionStorageUser === null) {
       //this.props.history.push('/signin');
-       this.context.router.history.push('/signin');
+       this.props.history.push('/signin');
     } else {
       return axios({
         method:'post',
@@ -53,6 +62,10 @@ class Search extends Component {
           'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json',
             'X-Auth-Token': sessionStorageToken
+          },
+          data: {
+            'body': this.body,
+            'interp': this.interp
           }
         })
         .then(function(response) {
@@ -62,8 +75,6 @@ class Search extends Component {
           }
         })
       }
-
-
   }
   selectedOption(selected){
     if(selected.lang === 'sv'){
@@ -104,7 +115,6 @@ class Search extends Component {
     }.bind(this))
   }
   render() {
-
     if(this.state.display === 'none'){
       return (
         <div className="inputsArea">
@@ -116,19 +126,22 @@ class Search extends Component {
           />
 
           <div>
-            <textarea className="form-control select" rows="3" placeholder="Example"></textarea>
-            <textarea className="form-control select" rows="3" placeholder="Interpretation"></textarea>
+            <textarea className="form-control select" rows="3" onChange={this.handleExample} placeholder="Example"></textarea>
+            <textarea className="form-control select" rows="3" onChange={this.handleInterpretation}  placeholder="Interpretation"></textarea>
             <div className="d-flex justify-content-around">
               <button  type="button" className="btn btn-success" onClick={this.handleCreate}>Create post</button>
             </div>
           </div>
         </div>
       )
-    }else if(this.state.display === 'block'){
+    }else {
       var word = this.state.words.map(word=><li key={word.body} className="list-group-item">
         <span>{word.body}</span>, <span>{word.interp}</span> <span className="flag-icon flag-icon-gb"></span></li>)
       return (
+        <div>
+
         <div className="inputsArea">
+
           <Select.Async
             labelKey='value'
             loadOptions={this.logChange}
@@ -156,6 +169,7 @@ class Search extends Component {
             </div>
           </div>
         </div>
+         </div>
       )
     }
     }

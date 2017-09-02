@@ -1,7 +1,10 @@
-import React, {Component} from 'react';
+import React, {PropTypes,Component} from 'react';
 import axios from 'axios';
 
 class SignIn extends Component{
+  // static contextTypes = {
+  //   router: PropTypes.object
+  // }
   constructor(props){
     super(props);
     this.state = {
@@ -23,7 +26,7 @@ class SignIn extends Component{
     })
   }
   signIn(){
-    debugger
+     let self = this;
      return axios({
       method:'put',
       url:'http://localhost:8080/api/users/auth',
@@ -37,8 +40,12 @@ class SignIn extends Component{
       }
     })
     .then(function(response) {
-      debugger
+       debugger
 
+      sessionStorage.setItem('userName',response.data.user.name);
+      sessionStorage.setItem('userEmail', response.data.user.email);
+      sessionStorage.setItem('token', response.data.token);
+      self.props.history.push('/mypage');//can not find history of undefined so use self bind this
     })
     .catch(function(error){
       debugger
@@ -61,7 +68,7 @@ class SignIn extends Component{
         </div>
         <div className="form-group row">
           <div className="offset-sm-2 col-sm-10">
-            <button type="submit" className="btn btn-primary" onClick={this.signIn}>Sign in</button>
+            <button  type="submit" className="btn btn-primary" onClick={this.signIn}>Sign in</button>
           </div>
         </div>
       </div>
